@@ -24,21 +24,21 @@ include("global.php");
             <div class="form-group">
                 
                     <label for="username" >Username</label>
-                    <input type="text" class="form-control" for="username" id="username" maxlength="16"/>
+                    <input type="text" class="form-control" name="username" id="username" maxlength="16"/>
                 
             </div>
 
             <div class="form-group">
                 
                     <label for="pass">Password</label>
-                    <input type= "text" class="form-control" for="pass" id="pass"/>
+                    <input type= "password" class="form-control" name="pass" id="pass"/>
                 
             </div>
 
             <div class = "form-group">
                 
                     <label for="confirm">Confirm Password</label>
-                    <input type= "text" class="form-control" for="confirm" id="confirm"/>
+                    <input type= "password" class="form-control" name="confirm" id="confirm"/>
                 
             </div>
             

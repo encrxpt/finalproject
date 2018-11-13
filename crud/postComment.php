@@ -10,6 +10,7 @@
     <link href="../stylesheets/nav.css?" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 
@@ -28,8 +29,11 @@
                     <textarea class="form-control" name="content" id="content"></textarea>
                 </div>
 
+                <div class="g-recaptcha" data-sitekey="6LcVmHoUAAAAACryV4B79Ab8Sz9E1AeIL18AoEXF"></div>
 
-                    <input type="submit" class ="btn btn-primary" name="create" value="Create" />
+                <input type="submit" class ="btn btn-primary" name="create" value="Create" />
+
+
                 
 
             </fieldset>

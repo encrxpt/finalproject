@@ -25,22 +25,21 @@ function retrieveCommentEdit($superGlobal)
         foreach($column as $columns)
         {
             ?>
-        <form class = "well">
-            <p>
+        
+            <div class="form-group">
                 <label for="title">Title</label>
-                <input name="title" id="title" value= "<?= $columns['title']?>"/>
-            </p>
-            <p>
+                <input name="title" class="form-control" id="title" value= "<?= $columns['title']?>"/>
+            </div>
+            
+            <div class="form-group">
                 <label for="content">Content</label>
-                <textarea name="content" id="content"><?= $columns['content']?></textarea>
-            </p>
+                <textarea name="content"  class="form-control" id="content"><?= $columns['content']?></textarea>
+            </div>
 
-            <p>
                 <input type="hidden" name="id" value="<?= $columns['commentsID']?>" />
-                <input type="submit" name="update" value="Update" />
-                <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you wish to delete this post?')" />
-            </p>
-        </form>
+                <input type="submit" class="btn btn-primary"name="update" value="Update" />
+                <input type="submit" class="btn btn-primary" name="delete" value="Delete" onclick="return confirm('Are you sure you wish to delete this post?')" />
+
             <?php
         }
     }

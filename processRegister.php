@@ -1,8 +1,6 @@
 <?php
+include 'crud/connect.php';
 if(isset($_POST['signup'])){
-    include 'crud/connect.php';
-
-    $hash_password = password_hash($password);
 
     
     if($_POST['username'] != null && isset($_POST['username'])){
@@ -19,7 +17,9 @@ if(isset($_POST['signup'])){
     }
 
     if($password && $confirmPass){
-        $hashPassword = password_hash($password);
+        if($password == $confirmPass){
+            $hashPassword = password_hash($password,true);
+        }
     }
     
     if($username && $hashPassword){
@@ -27,13 +27,14 @@ if(isset($_POST['signup'])){
             values (:username, :hashed)";
         $stmt = $db->prepare($query);
         $stmt->bindValue(':username', $username);
-        $stmt->bindValue(':hashed', $hashed);
-
+        $stmt->bindValue(':hashed', $hashPassword);
+        
         $stmt->execute();
+        
     } else {
-        header("Location: errorpage.php");
+       header("Location: crud/errorpage.php");
     }
 
-    header("Location: login.php");
+    header("Location: index.php");
     exit;
 }

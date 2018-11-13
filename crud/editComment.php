@@ -1,7 +1,6 @@
 <?php
 include("../global.php");
 include("auth.php");
-include("retrieveCommentEdit.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +18,12 @@ include("retrieveCommentEdit.php");
 </div>
 
 <div id="content">
-    <form action="<?=url('/crud/processComment.php')?>" method="post">
+  <?php  if(isset($_GET['edit'])){
+      include 'retrieveCommentEdit.php';
+  }
+
+  ?>
+    <form class="well" action="<?=url('/crud/processComment.php')?>" method="post">
         <fieldset>
             <legend>Edit Comment / Question</legend>
 

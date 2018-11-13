@@ -11,6 +11,8 @@
     <link href="stylesheets/style.css" rel="stylesheet" type="text/css"/>
     <link href="stylesheets/nav.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
     <div id="navBar">
