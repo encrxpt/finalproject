@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,27 +9,28 @@
     <link href="../stylesheets/style.css?" rel="stylesheet" type="text/css"/>
     <link href="../stylesheets/nav.css?" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
     <div id="content">
-        <form action="<?=url('/crud/processComment.php')?>" method="post">
+        <form class = "well" action="<?=url('/crud/processComment.php')?>" method="post">
             <fieldset>
 
                 <legend>Comments or Questions</legend>
-                <p>
+                <div class="form-group">
                     <label for="title">Title</label>
-                    <input name="title" id="title" />
-                </p>
+                    <input class="form-control" name="title" id="title" />
+                </div>
 
-                <p>
+                <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea name="content" id="content"></textarea>
-                </p>
+                    <textarea class="form-control" name="content" id="content"></textarea>
+                </div>
 
-                <p>
-                    <input type="submit" name="create" value="Create" />
-                </p>
+
+                    <input type="submit" class ="btn btn-primary" name="create" value="Create" />
+                
 
             </fieldset>
         </form>

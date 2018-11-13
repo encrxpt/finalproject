@@ -25,7 +25,7 @@ function retrieveCommentEdit($superGlobal)
         foreach($column as $columns)
         {
             ?>
-
+        <form class = "well">
             <p>
                 <label for="title">Title</label>
                 <input name="title" id="title" value= "<?= $columns['title']?>"/>
@@ -40,7 +40,7 @@ function retrieveCommentEdit($superGlobal)
                 <input type="submit" name="update" value="Update" />
                 <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you wish to delete this post?')" />
             </p>
-
+        </form>
             <?php
         }
     }

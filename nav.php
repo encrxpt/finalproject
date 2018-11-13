@@ -24,5 +24,11 @@
             </ul>
         </li>
         <li><a href="<?=url('questions.php')?>">Questions</a></li>
+        <div id = "register">
+            <ul>
+                <li><a href="#">Login</a></li>
+                <li><a href="register.php">Register</a></li>
+            </ul>
+        </div>
     </ul>
 </nav>

@@ -11,6 +11,7 @@ include("retrieveCommentEdit.php");
     <title>R6Wiki</title>
     <link href="../stylesheets/style.css" rel="stylesheet" type="text/css"/>
     <link href="../stylesheets/nav.css" rel="stylesheet" type="text/css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="navBar">
