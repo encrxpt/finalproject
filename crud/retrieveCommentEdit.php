@@ -25,7 +25,7 @@ function retrieveCommentEdit($superGlobal)
         foreach($column as $columns)
         {
             ?>
-<form class="well pl-5" enctype="multipart/form-data" method="post">
+<form class="well pl-5" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Title</label>
         <input name="title" class="form-control" id="title" value="<?= $columns['title']?>" />
@@ -38,7 +38,7 @@ function retrieveCommentEdit($superGlobal)
 
     <input type="hidden" name="id" value="<?= $columns['commentsID']?>" />
     <?php if(empty($columns['imagename'])) {?>
-    <input type="file" class="form-control-file pb-3" enctype="multipart/form-data" name="fileToUpload">
+    <input type="file" class="form-control-file pb-3" name="fileToUpload">
     <?php } else { ?>
     <img src="../pImage/<?=$columns['imagename'] ?>" alt="photo" />
     <input type="submit" class="btn btn-primary" name="remPhoto" value="Remove Image" onclick="return confirm('Are you sure you wish to delete the photo?')" />

@@ -141,7 +141,7 @@ if(isset($_POST['update'])) {
     $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-    if (!$title || !$content || !$id) {
+    if ($title == null || $content == null|| $id == null) {
         $_SESSION['updateError'] = "Please fill in the whole form.";
     }
     
@@ -177,7 +177,6 @@ if(isset($_POST['update'])) {
         if($img_check == true && $has_img == true){
             
             echo 'test3';
-            $username = $_SESSION['username'];
             $image_filename = $_FILES['fileToUpload']['name'];
             $temporary_image_path = $_FILES['fileToUpload']['tmp_name'];
             $new_image_path = file_upload_path($image_filename);            
@@ -197,10 +196,10 @@ if(isset($_POST['update'])) {
             $stmt->bindValue(':imagename', $image_filename);
             $stmt->execute();
 
-        // header("Location: ../questions.php");
+        header("Location: ../questions.php");
         exit;
             
-        } /*else {
+        } else {
         $query = "UPDATE comment SET title = :title, content = :content WHERE commentsID = :id";
         $stmt = $db->prepare($query);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -208,10 +207,12 @@ if(isset($_POST['update'])) {
         $stmt->bindValue(':content', $content);
         $stmt->execute();
 
-        //header("Location: ../questions.php");
+        header("Location: ../questions.php");
         exit;
-        }*/
-    }  
+        }
+    }
+    
+    else echo 'test';
 }
 
 if(isset($_POST['remPhoto'])){

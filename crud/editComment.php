@@ -21,7 +21,7 @@ include("../global.php");
     <main role="main" class="container">
         <div class="starter-template bg-light">
             <div class="col-md-6 align-middle">
-                <form class="well" action="<?=url('/crud/processComment.php')?>" method="post">
+                <form class="well" action="<?=url('/crud/processComment.php')?>" method="post" enctype="multipart/form-data">
                     <legend>Edit Comment / Question</legend>
                     <?php  if(isset($_GET['edit'])){
                         include 'retrieveCommentEdit.php';
