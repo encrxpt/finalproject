@@ -213,4 +213,26 @@ if(isset($_POST['update'])) {
         }*/
     }  
 }
+
+if(isset($_POST['remPhoto'])){
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+    
+    $query = "SELECT * FROM comment WHERE commentsID = {id}";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $column = $stmt->fetch();
+    
+    $file = "pImage/".$column['imagename'];
+    unlink($file);
+    
+    $image_filename = null;
+    
+    $query = "UPDATE comment SET imagename = :imagename WHERE commentsID = :id";
+    $stmt = $db->prepare($query);
+    $stmt->bindValue(':id', $id);
+    $stmt->bindValue(':imagename', $image_filename);
+    $stmt->execute();
+    
+    header("Location: editComment.php?edit=".$column['commentsID']);
+}
  ?>
