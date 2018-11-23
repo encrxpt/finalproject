@@ -15,26 +15,27 @@ function retrieveComments()
     if ($tables->rowCount() != null) {
         foreach ($column as $columns) {
             ?>
-            <div class="blog_post">
-            <h2><a href=<?=url('/crud/fullComment.php?fullpage='. $columns['commentsID'])?>><?= $columns['title'] ?></a></h2>
-            <p>
-                <small>
-                    <?= $columns['datetime'] ?>
-                    <a href=<?=url('/crud/editComment.php?edit')?>=<?= $columns['commentsID'] ?>">edit</a>
-                </small>
-            </p>
+<div class="pt-5">
+    <h2><a href=<?=url('/crud/fullComment.php?fullpage='. $columns['commentsID'])?>>
+            <?= $columns['title'] ?></a></h2>
+    <p>
+        <small>
+            <?= $columns['datetime'] ?>
+            <a href=<?=url('/crud/editComment.php?edit='. $columns['commentsID'])?>>edit</a>
+        </small>
+    </p>
 
-            <div class='blog_content'>
-                <?= substr($columns['content'], 0, 50) ?>
-                <?php
+    <div class='blog_content'>
+        <?= substr($columns['content'], 0, 50) ?>
+        <?php
                 if (strlen($columns['content']) > 50) { ?>
-                    <a href=<?=url('/crud/fullComment.php?fullpage')?>=<?= $columns['commentsID'] ?>>Read Full Post...</a>
-                    <?php
+        <a href=<?=url('/crud/fullComment.php?fullpage='.$columns['commentsID']) ?>>Read Full Post...</a>
+        <?php
                 }
                 ?>
-                </div>
-                </div>
-                <?php
+    </div>
+</div>
+<?php
             }
         }
         else

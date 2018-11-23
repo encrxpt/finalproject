@@ -9,12 +9,6 @@ function retrieveFullComment($superGlobal)
     {
         $post_id = filter_input(INPUT_GET, 'fullpage', FILTER_SANITIZE_NUMBER_INT);
 
-        if(!$post_id)
-        {
-            header('Location: errorpage.php');
-            exit;
-        }
-
         $query = "SELECT * FROM comment WHERE commentsID = {$post_id}";
         $tables = $db->prepare($query);
         $tables -> execute();
@@ -26,21 +20,36 @@ function retrieveFullComment($superGlobal)
         foreach($column as $columns)
         {
             ?>
+<main role="main" class="container">
+    <div class="starter-template bg-light">
+        <h1><a href="fullComment.php"></a>
+            <?= $columns['title'] ?>
+        </h1>
+        <p>
+            <small>
+                <?= $columns['datetime'] ?>
+                <a href="editComment.php?edit=<?= $columns['commentsID'] ?>">edit</a>
+            </small>
+        </p>
 
-            <div class="blog_post">
-                <h2><a href="fullComment.php"></a><?= $columns['title'] ?></h2>
-                <p>
-                    <small>
-                        <?= $columns['datetime'] ?>
-                        <a href="editComment.php?edit=<?= $columns['commentsID'] ?>">edit</a>
-                    </small>
-                </p>
+        <div class="md-5">
+            <p class="lead">
+                <?= $columns['content'] ?><br></p>
+            <?php if($columns['imagename'] != null && $columns['imagename'] != "none") {?>
+            <img src="../pImage/<?=$columns['imagename'] ?>" alt="photo" />
+            <?php } ?>
+        </div>
+    </div>
 
-                <div class='blog_content'>
-                    <?= $columns['content'] ?>
-                </div>
-            </div>
-            <?php
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>
+    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+
+</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<?php
         }
     }
     else
