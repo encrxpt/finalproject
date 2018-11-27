@@ -47,6 +47,7 @@ function retrieveCommentEdit($superGlobal)
         <input type="submit" class="btn btn-primary" name="update" value="Update" />
         <input type="submit" class="btn btn-primary" name="delete" value="Delete" onclick="return confirm('Are you sure you wish to delete this post?')" />
     </div>
+
 </form>
 <?php
         }
