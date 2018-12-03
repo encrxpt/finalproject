@@ -14,38 +14,21 @@ function retrieveComments()
         $stmt->execute();
         $name = $stmt->fetch();
         
-        if(isset($_GET['sort'])){
-            if($_GET['sort'] == 'id'){
-                $query = "SELECT * FROM comment WHERE com_category_id = {$catid} ORDER BY commentsID ASC LIMIT 15";
-                $tables = $db->prepare($query);
-                $tables->execute();
-                $column = $tables->fetchAll();
-            }
-        
-      
-            if($_GET['sort'] == 'title'){
-                $query = "SELECT * FROM comment WHERE com_category_id = {$catid} ORDER BY title ASC LIMIT 15";
-                $tables = $db->prepare($query);
-                $tables->execute();
-                $column = $tables->fetchAll();
-            }
-         
-            if($_GET['sort'] == 'content'){
-                $query = "SELECT * FROM comment WHERE com_category_id = {$catid} ORDER BY content ASC LIMIT 15";
-                $tables = $db->prepare($query);
-                $tables->execute();
-                $column = $tables->fetchAll();
-            }
- 
-            if($_GET['sort'] == 'date'){
-                $query = "SELECT * FROM comment WHERE com_category_id = {$catid} ORDER BY datetimestamp ASC LIMIT 15";
-                $tables = $db->prepare($query);
-                $tables->execute();
-                $column = $tables->fetchAll();
-            }
+        if(isset($_GET['col'])){
+            $col = $_GET['col'];
+        } else {
+            $col = "datetimestamp";
         }
         
-        $query = "SELECT * FROM comment WHERE com_category_id = {$catid} LIMIT 15";
+        if(isset($_GET['sort'])){
+            $sort = $_GET['sort'];
+        } else {
+            $sort = "ASC";
+        }
+        
+        $sort == 'ASC' ? $sort = 'DESC' : $sort = 'ASC';
+        
+        $query = "SELECT * FROM comment WHERE com_category_id = {$catid} ORDER BY $col $sort LIMIT 15";
         $tables = $db->prepare($query);
         $tables->execute();
         $column = $tables->fetchAll();
@@ -56,16 +39,17 @@ function retrieveComments()
     </caption>
     <thead class="thead-light">
         <tr>
-            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=id">ID</a></th>
-            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=title">Title</a></th>
-            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=content">Content</a></th>
-            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=content">Date Posted</a></th>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&col=commentsID&&sort=<?=$sort?>">ID</a></th>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&col=title&&sort=<?=$sort?>">Title</a></th>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&col=content&&sort=<?=$sort?>">Content</a></th>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&col=datetimestamp&&sort=<?=$sort?>">Date Posted</a></th>
             <th scope="col"></th>
         </tr>
     </thead>
     <?php
     
     if ($tables->rowCount() != null):
+        
         foreach ($column as $columns):
             ?>
     <tr>
