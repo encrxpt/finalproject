@@ -5,42 +5,63 @@ include("connect.php");
 function retrieveComments()
 {
     global $db;
-
-    $query = "SELECT * FROM comment ORDER BY datetimestamp ASC LIMIT 15";
+    if(isset($_GET['catid'])){
+        
+    $catid = $_GET['catid'];
+        if($_GET['sort' == 'id']){
+            $query = "SELECT * FROM comment WHERE com_category_id = {$catid} ORDER BY datetimestamp ASC LIMIT 15";
     $tables = $db->prepare($query);
     $tables->execute();
     $column = $tables->fetchAll();
-
-
-    if ($tables->rowCount() != null) {
-        foreach ($column as $columns) {
+        }
+    $query = "SELECT * FROM comment WHERE com_category_id = {$catid} ORDER BY datetimestamp ASC LIMIT 15";
+    $tables = $db->prepare($query);
+    $tables->execute();
+    $column = $tables->fetchAll();
+?>
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=id">ID</a></th>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=title">Title</a></th>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=content">Content</a></th>
+            <th scope="col"><a href="questionsedit.php?catid=<?= $catid?>&&sort=date">Date Posted</a></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <?php
+    
+    if ($tables->rowCount() != null):
+        foreach ($column as $columns):
             ?>
-<div class="pt-5">
-    <h2><a href=<?=url('/crud/fullComment.php?fullpage='. $columns['commentsID'])?>>
-            <?= $columns['title'] ?></a></h2>
-    <p>
-        <small>
-            <?= $columns['datetime'] ?>
-            <a href=<?=url('/crud/editComment.php?edit='. $columns['commentsID'])?>>edit</a>
-        </small>
-    </p>
+    <tr>
+        <th scope="row">
+            <?= $columns['commentsID']?>
+        </th>
 
-    <div class='blog_content'>
-        <?= substr($columns['content'], 0, 50) ?>
-        <?php
-                if (strlen($columns['content']) > 50) { ?>
-        <a href=<?=url('/crud/fullComment.php?fullpage='.$columns['commentsID']) ?>>Read Full Post...</a>
-        <?php
+        <td>
+            <a href=<?=url('/crud/fullComment.php?fullpage='. $columns['commentsID'])?>>
+                <?= $columns['title'] ?></a>
+        </td>
+
+        <td>
+            <?= substr($columns['content'], 0, 100) ?>
+            <?php
+                if (strlen($columns['content']) > 100) { ?>
+            <a href=<?=url('/crud/fullComment.php?fullpage='.$columns['commentsID']) ?>>Read Full Post...</a>
+            <?php
                 }
                 ?>
-    </div>
-</div>
+        </td>
+        <td>
+            <?= $columns['datetime'] ?>
+        </td>
+
+        <td><a href=<?=url('/crud/editComment.php?edit='. $columns['commentsID'])?>>edit</a></td>
+        <?php endforeach?>
+        <?php endif?>
+    </tr>
+</table>
 <?php
-            }
-        }
-        else
-        {
-            print "No comments available";
-        }
-    }
-?>
+}
+}

@@ -1,6 +1,5 @@
 <?php
  include("global.php");
-include 'crud/connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,37 +27,29 @@ include 'crud/connect.php';
     <?php include("testnav.php");?>
     <main role="main" class="container bg-light">
         <div class="starter-template bg-light">
+            <div class="align-middle">
+                <?php include("crud/retrieveComments.php");?>
+                <div class="align-middle">
 
-            <?php include("crud/postComment.php")?>
-            <div class="pt-2">
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+                    <!-- Include Editor JS files. -->
 
-                <!-- Include Editor JS files. -->
+                    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
 
-                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
+                    <!-- Initialize the editor. -->
+                    <script>
+                        $(function() {
+                            $('textarea').froalaEditor()
+                        });
 
-                <!-- Initialize the editor. -->
-                <script>
-                    $(function() {
-                        $('textarea').froalaEditor()
-                    });
+                    </script>
 
-                </script>
+                    <?php retrieveComments();?>
+                </div>
             </div>
-
-            <?php $query = "SELECT * FROM category";
-                    $tables = $db->prepare($query);
-                    $tables -> execute();
-                    $column = $tables->fetchAll();
-                        foreach($column as $categories):?>
-
-            <h2><a href="questionsedit.php?catid=<?=$categories['category_id']?>">
-                    <?=$categories['category_name']?></a>
-            </h2>
-            <?php endforeach ?>
         </div>
     </main>
 </body>
