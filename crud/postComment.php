@@ -33,6 +33,19 @@
 
                 <input type="submit" class="btn btn-primary" name="create" value="Create" />
 
+                <select name="categoryid">
+
+                    <?php $query = "SELECT * FROM category";
+                    $tables = $db->prepare($query);
+                    $tables -> execute();
+                    $column = $tables->fetchAll();
+                        foreach($column as $categories):?>
+
+                    <option value="<?= $categories['category_id']?>">
+                        <?= $categories['category_name']?>
+                    </option>
+                    <?php endforeach ?>
+                </select>
 
 
 
